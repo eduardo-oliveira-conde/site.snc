@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="portugues-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +14,11 @@
         </div>
     </header>
 
-    <nav class="site-nav">
+    <nav class="site-nav" id="main-navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="main-navigation">
+            <span class="sr-only">Abrir menu</span>
+            ☰
+        </button>
         <div class="container nav-container">
             <a href="#inicio">Início</a>
             <a href="#sobre">Sobre</a>
@@ -27,7 +31,7 @@
 
     <main>
         <section id="inicio" class="hero">
-            <div class="container hero-content">
+            <div class="container hero-content animate-on-scroll">
                 <h2>Bem-vindo ao SNC</h2>
                 <p>Somos um grupo de jovens que entendeu que a fé e a razão caminham juntas — e que dá, sim, para amar a Deus enquanto discutimos cultura pop, ficção científica, teologia !.</p>
                 <div class="hero-actions">
@@ -38,7 +42,7 @@
         </section>
 
         <section id="sobre" class="section section-grey">
-            <div class="container">
+            <div class="container animate-on-scroll">
                 <h2>Quem somos</h2>
                 <p>A Sociedade dos Nerds Católicos é um grupo de pessoas que acredita em trabalho colaborativo, aprendizado contínuo.</p>
                 <div class="image-highlight">
@@ -62,7 +66,7 @@
         </section>
 
         <section id="historia" class="section section-grey">
-            <div class="container">
+            <div class="container animate-on-scroll">
                 <h2>Nossa história</h2>
                 <p>.Somos a SNC, Sociedade dos Nerds Católicos, criada em 2025 por um grupo de amigos que buscam o fortalecimento na fé, o conhecimento sobre o catolicismo, e, acima de tudo, amar a Deus!
 O grupo surgiu após uma missão paroquial onde nossos integrantes Pedro, Sarah, Alana, Laura L., Ana e Wolliver se juntaram, mas, o nome “SNC” surgiu após alguns meses quando a Sarah decidiu que seríamos os nerds católicos, que gostamos de nossas nerdices mas ao mesmo tempo do catolicismo.
@@ -72,17 +76,17 @@ Ao passar do tempo, mais integrantes se juntaram a nossa sociedade</p>
         </section>
 
         <section id="fotos" class="section">
-            <div class="container">
+            <div class="container animate-on-scroll">
                 <h2>Fotos do grupo</h2>
                 <p>Alguns momentos que representam a nossa caminhada, amizade e presença uns com os outros.</p>
                 <div class="gallery-grid">
-                    <div class="gallery-item">
+                    <div class="gallery-item animate-on-scroll">
                         <img src="../images/grupo1.jpg" alt="Foto do grupo SNC">
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item animate-on-scroll">
                         <img src="../images/grupo2.jpg" alt="Momentos do grupo em encontro">
                     </div>
-                    <div class="gallery-item">
+                    <div class="gallery-item animate-on-scroll">
                         <img src="../images/grupo3.jpg" alt="Grupo reunido em atividade">
                     </div>
                 </div>
@@ -90,20 +94,21 @@ Ao passar do tempo, mais integrantes se juntaram a nossa sociedade</p>
         </section>
 
         <section id="membros" class="section">
-            <div class="container">
-                <h2>Membros</h2>
+            <div class="container animate-on-scroll">
+                <h2>Membros representantes </h2>
                 <p>Conheça quem faz parte do SNC e como cada pessoa contribui para o nosso grupo.</p>
                 <ul class="member-list">
-                    <li>- Organização e comunicação</li>
-                    <li>- Criação de conteúdo e design</li>
-                    <li>- Projetos e eventos</li>
-                  
+                    <li class="animate-on-scroll">- pedro - </li>
+                    <li class="animate-on-scroll">- sara </li>
+                    <li class="animate-on-scroll">- ana </li>
+                    <li class="animate-on-scroll">- alana </li>
+                    <li class="animate-on-scroll">- Laura  </li>
                 </ul>
             </div>
         </section>
 
         <section id="contato" class="section section-grey">
-            <div class="container">
+            <div class="container animate-on-scroll">
                 <h2>Venha fazer parte!</h2>
                 <p>Se você gosta de conversar sobre fé, cultura pop, filmes, games e viver em comunidade, este espaço é para você.</p>
                 <p>Nosso grupo é um lugar de amizade, reflexão e muita boa companhia. Se quiser acompanhar nossas atividades e participar, venha conversar conosco no Instagram: <strong>@sociedadecatolicos_</strong></p>
@@ -117,6 +122,28 @@ Ao passar do tempo, mais integrantes se juntaram a nossa sociedade</p>
             <p>SNC © 2026.</p>
         </div>
     </footer>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const body = document.body;
+
+        navToggle?.addEventListener('click', () => {
+            const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', String(!isOpen));
+            body.classList.toggle('nav-open', !isOpen);
+        });
+
+        const revealItems = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.18 });
+
+        revealItems.forEach(item => observer.observe(item));
+    </script>
 </body>
 </html>
 
